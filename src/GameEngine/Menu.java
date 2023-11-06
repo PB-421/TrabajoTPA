@@ -43,5 +43,4 @@ public class Menu {
         screen.setVisible(true);
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
 }
