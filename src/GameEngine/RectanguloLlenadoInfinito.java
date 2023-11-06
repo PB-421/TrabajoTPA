@@ -74,8 +74,8 @@ public class RectanguloLlenadoInfinito extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(50, 50, width, 100); // Dibuja el rectángulo
         g.setColor(Color.RED);
-        g.drawRect(50, 50, maxWidth+1, 100); //dibuja el borde
-        g.drawRect(49, 49, maxWidth+1, 101);
+        g.drawRect(50, 50, maxWidth + 1, 100); //dibuja el borde
+        g.drawRect(49, 49, maxWidth + 1, 101);
     }
 
     public double getAcceleration() {
@@ -90,13 +90,14 @@ public class RectanguloLlenadoInfinito extends JPanel {
             }
         });
     }
-   public RectanguloLlenadoInfinito(){
-       JFrame frame = new JFrame("Rectángulo Llenado Progresivo");
-       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       RectanguloLlenadoInfinito panel = new RectanguloLlenadoInfinito(400);// Ancho máximo
-       frame.add(panel);
-       frame.setLocation(800,300);
-       frame.setSize(500, 200);
-       frame.setVisible(true);
-   }
+
+    public RectanguloLlenadoInfinito() {
+        JFrame frame = new JFrame("Rectángulo Llenado Progresivo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        RectanguloLlenadoInfinito panel = new RectanguloLlenadoInfinito(400);// Ancho máximo
+        frame.add(panel);
+        frame.setLocation(800, 300);
+        frame.setSize(500, 200);
+        frame.setVisible(true);
+    }
 }

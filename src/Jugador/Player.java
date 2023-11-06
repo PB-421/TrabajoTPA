@@ -15,6 +15,6 @@ public class Player {
     }
 
     public void accelerate(double num) {
-        acceleration=num;
+        acceleration = num;
     }
 }

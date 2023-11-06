@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 
 public class Menu {
     public static void main(String[] args) {
-        JFrame pantalla = new JFrame("Prueba");;
+        JFrame pantalla = new JFrame("Prueba");
+        ;
         generarInicio(pantalla);
     }
+
     public static void generarInicio(JFrame screen) {
         JButton b1 = new JButton("Play");
         JButton b2 = new JButton("Settings");
