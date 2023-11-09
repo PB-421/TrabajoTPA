@@ -1,16 +1,20 @@
 package GameEngine;
 
+import GameEngine.SettingsPage;
+import GameEngine.createScene;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Menu {
     public static void main(String[] args) {
-        JFrame pantalla = new JFrame("Prueba");
-        ;
+        JFrame pantalla = new JFrame("Menu");;
         generarInicio(pantalla);
-    }
+        System.out.println("Hello, world!");
+        System.out.println("ALLL MY FELLAS");
 
+    }
     public static void generarInicio(JFrame screen) {
         JButton b1 = new JButton("Play");
         JButton b2 = new JButton("Settings");
@@ -23,9 +27,17 @@ public class Menu {
             public void actionPerformed(ActionEvent e) {
                 screen.dispose();
                 new NPCMessage();
-                new RectanguloLlenadoInfinito();
+                new createScene();
+
+
             }
 
+        });
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SettingsPage();
+            }
         });
         b3.addActionListener(new ActionListener() {
             @Override
@@ -43,4 +55,5 @@ public class Menu {
         screen.setVisible(true);
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
 }

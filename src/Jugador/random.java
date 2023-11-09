@@ -1,7 +1,6 @@
 package Jugador;
 
 import java.util.Random;
-
 public class random {
     public double Randomizer(int level) {
         double Empiezo = 0;

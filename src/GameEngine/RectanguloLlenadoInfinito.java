@@ -1,35 +1,43 @@
 package GameEngine;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class RectanguloLlenadoInfinito extends JPanel {
 
     private int width = 0;
-    // Ancho inicial del rectángulo
-    private int maxWidth; // Ancho máximo del rectángulo
+    private int maxWidth;
     private Timer timer;
     private int acceleration = 0;
     private double acceleracionD = acceleration;
+    private BufferedImage image;
 
     public RectanguloLlenadoInfinito(int maxWidth) {
         this.maxWidth = maxWidth;
-        setFocusable(true); // Asegurarse de que el panel tenga el foco para recibir eventos de teclado
+        setFocusable(true);
+
+        try {
+            image = ImageIO.read(new File("PNG Car Frames - Copy/Car Frames/Frame 1 Initial Light tamaño.png")); // Reemplaza "ruta_de_tu_imagen.jpg" con la ruta real de tu imagen
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    startAnimation(); // Comienza la animación al presionar la tecla SPACE
+                    startAnimation();
                 }
             }
 
@@ -50,15 +58,15 @@ public class RectanguloLlenadoInfinito extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (width < maxWidth) {
-                        width += 3; // Aumenta el ancho del rectángulo
-                        repaint(); // Vuelve a dibujar el panel
+                        width += 5;
+                        repaint();
                         acceleration = (width * 100) / maxWidth;
                     } else {
                         width = 0;
                     }
                 }
             });
-            timer.start(); // Inicia el temporizador solo si no está en ejecución
+            timer.start();
         }
     }
 
@@ -71,33 +79,41 @@ public class RectanguloLlenadoInfinito extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        // Dibuja la imagen en la ventana
+        if (image != null) {
+            g.drawImage(image, 0, 0, this);
+        }
+
         g.setColor(Color.BLACK);
-        g.fillRect(50, 50, width, 100); // Dibuja el rectángulo
+        g.fillRect(320, 75, width, 100);
+
         g.setColor(Color.RED);
-        g.drawRect(50, 50, maxWidth + 1, 100); //dibuja el borde
-        g.drawRect(49, 49, maxWidth + 1, 101);
+        g.drawRect(320, 75, maxWidth + 1, 100);
+        g.drawRect(319, 74, maxWidth + 1, 101);
     }
 
     public double getAcceleration() {
         return acceleracionD;
+    }
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(1100, 700);
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new RectanguloLlenadoInfinito();
+                JFrame frame = new JFrame("Rectángulo Llenado Progresivo con Imagen");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                RectanguloLlenadoInfinito panel = new RectanguloLlenadoInfinito(500);
+                frame.add(panel);
+                frame.setLocation(150, 100);
+                frame.setSize(1100, 700); // Ajusta el tamaño según tus necesidades
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
             }
         });
-    }
-
-    public RectanguloLlenadoInfinito() {
-        JFrame frame = new JFrame("Rectángulo Llenado Progresivo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        RectanguloLlenadoInfinito panel = new RectanguloLlenadoInfinito(400);// Ancho máximo
-        frame.add(panel);
-        frame.setLocation(800, 300);
-        frame.setSize(500, 200);
-        frame.setVisible(true);
     }
 }
