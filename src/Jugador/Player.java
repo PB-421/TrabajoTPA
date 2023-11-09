@@ -1,5 +1,7 @@
 package Jugador;
 
+import Jugador.Car;
+
 public class Player {
     private String name;
     private Car car;
@@ -15,6 +17,6 @@ public class Player {
     }
 
     public void accelerate(double num) {
-        acceleration = num;
+        acceleration=num;
     }
 }

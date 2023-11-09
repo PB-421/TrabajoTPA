@@ -1,5 +1,8 @@
 package Jugador;
 
+import java.util.logging.Level;
+
+
 public class NPC extends Player {
     public int Level;
 

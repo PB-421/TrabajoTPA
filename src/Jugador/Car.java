@@ -15,7 +15,7 @@ public class Car {
     }
 
     public void setAcceleration(double _acceleration) {
-        acceleration = _acceleration;
+        acceleration=_acceleration;
     }
 
     public String getModel() {
