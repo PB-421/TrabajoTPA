@@ -16,7 +16,7 @@ public class RectanguloLlenadoInfinito extends JPanel {
     private int maxWidth;
     private Timer timer;
     private int acceleration = 0;
-    private double acceleracionD = acceleration;
+    private double acceleracionD;
     private BufferedImage image;
 
     public RectanguloLlenadoInfinito(int maxWidth) {
@@ -94,6 +94,7 @@ public class RectanguloLlenadoInfinito extends JPanel {
     }
 
     public double getAcceleration() {
+        acceleracionD=acceleration;
         return acceleracionD;
     }
     @Override

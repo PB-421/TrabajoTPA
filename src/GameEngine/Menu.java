@@ -25,13 +25,19 @@ public class Menu {
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                screen.dispose();
-                new NPCMessage();
-                new createScene();
+                screen.setVisible(false);
+                JFrame nivel = new JFrame();
+                nivel.setSize(400, 300); // Tamaño del JFrame principal (puedes ajustarlo)
+                nivel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+                SwingUtilities.invokeLater(() -> {
+                    LevelSelect levelSelector = new LevelSelect(nivel);
+                    int selectedLevel = levelSelector.getSelectedLevel();
+                    System.out.println("Nivel seleccionado: " + selectedLevel);
+                    Game_P game = new Game_P();
+                    game.Game_P(selectedLevel);
+                });
             }
-
         });
         b2.addActionListener(new ActionListener() {
             @Override
@@ -55,5 +61,4 @@ public class Menu {
         screen.setVisible(true);
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
 }

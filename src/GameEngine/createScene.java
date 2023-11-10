@@ -10,10 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
+import javax.swing.*;
 
 public class createScene {
 
@@ -22,7 +19,7 @@ public class createScene {
             @Override
             public void run() {
                 JFrame frame = new JFrame("Image Timer");
-                frame.add(new ImagePanel());
+                frame.add(new ImagePanel(1100.43,12));
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setLocationRelativeTo(null);
@@ -38,8 +35,18 @@ public class createScene {
         int frameCounter = 0;
         Timer timer;
 
-        public ImagePanel() {
+        double tiempoP;
+
+        int frameint;
+
+        int tiempoRival;
+
+        int contaux=1;
+
+        public ImagePanel(double frames,double tiempoNPC) {
             images = new BufferedImage[10];
+            frameint = (int) frames;
+            tiempoRival = (int) tiempoNPC;
             try {
                 images[0] = ImageIO.read(new File("PNG Car Frames - Copy/Car Frames/Car Moving Fr4ame 1.png"));
                 images[1] = ImageIO.read(new File("PNG Car Frames - Copy/Car Frames/Car Moving Fram 4.png"));
@@ -75,10 +82,11 @@ public class createScene {
             }
             setBackground(Color.BLACK);
 
-            timer = new Timer(1000, new ActionListener() {
+            timer = new Timer(frameint, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     repaint();
+                    contaux++;
                 }
             });
             timer.start();
@@ -101,13 +109,40 @@ public class createScene {
                 g.drawImage(img, 0, 0, 1100, 700, 0, 0, img.getWidth(), img.getHeight(), this);
                 timer.stop();
             }
-
             frameCounter = (frameCounter + 1) % (startImages.length + images.length + EndImages.length);
+            if(contaux==14){
+                JFrame info = new JFrame("Resultado");
+                info.setSize(300,100);
+                info.setLocation(650,400);
+                info.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                JPanel panel = new JPanel();
+                tiempoP = calcularTiempo(frameint);
+                JLabel texto = new JLabel("Has completado la carrera en "+tiempoP+" segundos");
+                if(tiempoP<tiempoRival){
+                    JLabel texto2 = new JLabel("Has Ganado!!!!");
+                    panel.add(texto2);
+                }
+                else if(tiempoP>tiempoRival){
+                    JLabel texto2 = new JLabel("Has perdido :(");
+                    panel.add(texto2);
+                }
+                else{
+                    JLabel texto2 = new JLabel("Has quedado empate");
+                    panel.add(texto2);
+                }
+                panel.add(texto);
+                info.add(panel);
+                info.setVisible(true);
+            }
         }
 
         @Override
         public Dimension getPreferredSize() {
             return new Dimension(1100, 700);
+        }
+
+        public double calcularTiempo(double frame){
+            return ((frame/1000)*10);
         }
     }
 }
